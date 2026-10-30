@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>MAYA // CYBER COMPANION OS</title>
+  <link rel="stylesheet" href="style.css?v=3.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Consolas&family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ==================== TOP HEADER BAR ==================== -->
+  <header class="top-header">
+    <div class="header-left">
+      <!-- Maya Cyan Badge -->
+      <div class="badge-frame">
+        <span class="badge-label">◈ MAYA // CYBER-OS v4.5</span>
+      </div>
+      <!-- Dynamic Greeting & Date -->
+      <div class="greeting-label" id="greetingLabel">
+        GOOD MORNING // ROOT: NIMISH ☀️ | THURSDAY // OCT 30, 2026
+      </div>
+    </div>
+
+    <div class="header-right">
+      <!-- Status Pill -->
+      <div class="status-pill" id="statusPill">
+        <span class="status-label" id="statusLabel">● STANDBY</span>
+      </div>
+
+      <!-- Engine Pill -->
+      <div class="engine-pill" id="enginePill">
+        <span class="engine-label">⚡ NVIDIA // NEMOTRON-70B</span>
+      </div>
+
+      <!-- Tool Arsenal Button -->
+      <button class="btn-arsenal" id="btnOpenArsenal" title="Explore & Run all 198 System Tools">
+        ◈ TOOL ARSENAL [198]
+      </button>
+
+      <!-- Clock Display -->
+      <div class="clock-label" id="clockLabel">
+        [ 00:00:00 AM ]
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN 3-COLUMN BODY ==================== -->
+  <main class="main-body">
+
+    <!-- ========== COLUMN 1: LEFT (NEURAL MATRIX & COMMAND DECK) ========== -->
+    <div class="col-left">
+
+      <!-- Card: NEURAL MATRIX -->
+      <div class="cyber-card card-matrix">
+        <div class="card-header-bar">
+          <span class="hdr-title">// NEURAL MATRIX</span>
+          <span class="hdr-tag tag-green">[ ONLINE // 0x01 ]</span>
+        </div>
+
+        <!-- Radar Canvas -->
+        <div class="radar-container">
+          <canvas id="radarCanvas" width="110" height="110"></canvas>
+        </div>
+
+        <div class="maya-title">M A Y A</div>
+        <div class="maya-subtitle">NEURAL CYBER COMPANION</div>
+
+        <!-- Specs Table -->
+        <div class="specs-table">
+          <div class="spec-row">
+            <span class="spec-k">SYS.VOICE</span>
+            <span class="spec-v color-cyan">EDGE NEURAL (EMOTIVE)</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-k">LANG.NLU</span>
+            <span class="spec-v color-gold">ENGLISH + GUJARATI</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-k">AI.ENGINE</span>
+            <span class="spec-v color-rose">NVIDIA NEMOTRON 70B</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-k">SEC.VAULT</span>
+            <span class="spec-v color-green">AES-256 FERNET ENCRYPTED</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-k">ROOT.AUTH</span>
+            <span class="spec-v color-cyan">CREATOR // NIMISH</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-k">EMOTION.EQ</span>
+            <span class="spec-v color-soft-cyan">CALM &amp; ATTENTIVE</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card: RAPID COMMAND DECK -->
+      <div class="cyber-card card-deck">
+        <div class="card-header-bar">
+          <span class="hdr-title">// RAPID COMMAND DECK</span>
+          <span class="hdr-tag tag-gold">[ EXECUTE ]</span>
+        </div>
+
+        <div class="chips-grid">
+          <button class="chip-button" onclick="dispatchCmd('perform screen OCR analysis')">[01] ⚡ Screen OCR</button>
+          <button class="chip-button" onclick="dispatchCmd('take a screenshot')">[02] 📸 Capture Shot</button>
+          <button class="chip-button" onclick="dispatchCmd('what is the weather today')">[03] 🌤️ Weather Intel</button>
+          <button class="chip-button" onclick="dispatchCmd('play cyberpunk synthwave music on youtube')">[04] 🎵 Cyber Beats</button>
+          <button class="chip-button" onclick="dispatchCmd('set a focus timer for 25 minutes')">[05] ⏱️ 25m Focus Lock</button>
+          <button class="chip-button" onclick="dispatchCmd('run system diagnostics and hardware check')">[06] 💡 Diagnostics</button>
+          <button class="chip-button" onclick="dispatchCmd('turn on wifi')">[07] 📶 Wi-Fi On</button>
+          <button class="chip-button" onclick="dispatchCmd('turn on bluetooth')">[08] 🎧 Bluetooth On</button>
+          <button class="chip-button" onclick="dispatchCmd('open notepad and write a quick note')">[09] 📝 Notepad</button>
+          <button class="chip-button" onclick="dispatchCmd('generate a futuristic cybernetic workstation illustration')">[10] 🎨 Cyber Art</button>
+          <button class="chip-button" onclick="dispatchCmd('માયા, વાઇફાઇ ચાલુ કરો')">[11] 🇮🇳 વાઇફાઇ ચાલુ</button>
+          <button class="chip-button" onclick="dispatchCmd('માયા, બ્લૂટૂથ ચાલુ કરો')">[12] 🇮🇳 બ્લૂટૂથ ચાલુ</button>
+        </div>
+
+        <!-- Telemetry Stats Row -->
+        <div class="telemetry-stats-row">
+          <span class="stat-cpu" id="cpuLabel">CPU: 42%</span>
+          <span class="stat-ram" id="ramLabel">RAM: 68%</span>
+          <span class="stat-disk" id="diskLabel">DISK: 59%</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========== COLUMN 2: CENTER (ARC REACTOR & AUDIO EQUALIZER) ========== -->
+    <div class="col-center">
+
+      <!-- Card: ARC REACTOR // NEURAL CORE -->
+      <div class="cyber-card card-reactor">
+        <div class="card-header-bar">
+          <span class="hdr-title">◆ ARC REACTOR // NEURAL CORE</span>
+          <div class="wake-pill">WAKE WORD: 'MAYA'</div>
+        </div>
+
+        <!-- Reactor Canvas -->
+        <div class="reactor-canvas-wrap">
+          <canvas id="reactorCanvas" width="520" height="360"></canvas>
+        </div>
+
+        <!-- Mood Tag -->
+        <div class="mood-label" id="moodLabel">
+          [ MOOD: READY // CALM ATTENTIVE ◆ ]
+        </div>
+      </div>
+
+      <!-- Card: REAL-TIME AUDIO FREQUENCY EQUALIZER -->
+      <div class="cyber-card card-eq">
+        <div class="card-header-bar">
+          <span class="hdr-title">// REAL-TIME AUDIO FREQUENCY EQUALIZER</span>
+          <span class="hdr-tag tag-cyan">[ AUDIO BUS: ONLINE ]</span>
+        </div>
+
+        <!-- Equalizer Canvas -->
+        <div class="eq-canvas-wrap">
+          <canvas id="eqCanvas" width="520" height="105"></canvas>
+        </div>
+
+        <!-- Controls Dock -->
+        <div class="eq-controls-dock">
+          <button class="btn-listen" id="btnListen" onclick="toggleVoiceListen()">
+            🎙️ &nbsp; TAP TO SPEAK [LISTEN]
+          </button>
+          <button class="btn-lang" id="btnVoiceLang" onclick="cycleVoiceLanguage()" title="Click to cycle voice language: English, Gujarati, Hindi">
+            🌐 EN (India)
+          </button>
+          <button class="btn-mute" id="btnMute" onclick="toggleMuteTTS()">
+            ▢ MUTE TTS
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========== COLUMN 3: RIGHT (NEURAL DIALOGUE STREAM) ========== -->
+    <div class="col-right">
+
+      <div class="cyber-card card-dialogue">
+        <!-- Header with Purge Button -->
+        <div class="card-header-bar">
+          <span class="hdr-title">// NEURAL DIALOGUE STREAM</span>
+          <button class="btn-purge" onclick="purgeDialogue()">[ PURGE ]</button>
+        </div>
+
+        <!-- Terminal Display Box -->
+        <div class="terminal-box" id="terminalBox">
+          <div class="term-line line-sys">[00:00:00] [KERNEL] Maya Neural Subsystems Booting...</div>
+          <div class="term-line line-sys">⬡ MAYA: 198 tools registered across Multi-Agent Architecture.</div>
+          <div class="term-line line-sys">[KERNEL] All subsystems operational. Initializing Cyber Companion...</div>
+        </div>
+
+        <!-- Media Preview Card (Pops up when image is generated) -->
+        <div class="media-preview-box" id="mediaPreviewBox" style="display: none;">
+          <img id="generatedImg" src="" alt="Neural AI Art">
+          <div class="media-title" id="mediaTitle">AI Art Preview</div>
+        </div>
+
+        <!-- Bottom Input Dock -->
+        <div class="input-dock">
+          <input type="text" id="commandEntry" class="input-entry" placeholder="root@maya:~$ input voice command or query..." autocomplete="off">
+          <button class="btn-exec" id="btnExec" onclick="submitCommand()">[EXEC]</button>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ==================== TOOL ARSENAL MODAL (198 TOOLS) ==================== -->
+  <div class="cyber-modal-overlay" id="toolsModalOverlay">
+    <div class="cyber-modal-card">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span class="modal-glyph">⬡</span> MAYA MULTI-AGENT TOOL ARSENAL <span class="badge-count" id="toolCountBadge">198</span>
+        </div>
+        <button class="modal-close-btn" id="btnCloseModal" title="Close">&times;</button>
+      </div>
+
+      <div class="modal-filter-bar">
+        <div class="search-box-wrapper">
+          <input type="text" class="search-tools-input" id="searchToolsInput" placeholder="🔍 Search all 198 tools (e.g. wifi, battery, notepad, screenshot, code, volume)..." />
+        </div>
+        <div class="category-tabs" id="categoryTabs">
+          <button class="tab-btn active" data-cat="ALL">ALL (198)</button>
+          <button class="tab-btn" data-cat="Hardware & OS">🖥️ Hardware & OS</button>
+          <button class="tab-btn" data-cat="Web & Media">🌐 Web & Media</button>
+          <button class="tab-btn" data-cat="Productivity">📝 Productivity</button>
+          <button class="tab-btn" data-cat="AI & Vision">🎨 AI & Vision</button>
+          <button class="tab-btn" data-cat="Dev & Shell">⚡ Dev & Shell</button>
+        </div>
+      </div>
+
+      <div class="tools-grid-container" id="toolsGridContainer">
+        <div class="loading-tools">Loading Maya Neural Tool Registry...</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js?v=3.1"></script>
+</body>
+</html>

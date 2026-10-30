@@ -1,0 +1,28 @@
+assistant:
+  name: "Maya"
+  wake_word: "maya"
+  use_neural_voice: true        # Ultra-realistic neural TTS (edge-tts)
+  neural_voice: "en-IN-NeerjaNeural"   # Expressive Indian English female voice
+  gujarati_voice: "gu-IN-DhwaniNeural" # Expressive Gujarati female voice
+  hindi_voice: "hi-IN-SwaraNeural"     # Expressive Hindi female voice
+  voice_id: 0          # Fallback SAPI voice index
+  rate: 170            # Speech rate (words per minute style)
+
+  # =========================================================================
+  # PRIMARY ENGINE: NEBIUS TOKEN FACTORY (NVIDIA NEMOTRON)
+  # =========================================================================
+  provider: "nebius"
+  base_url: "https://api.tokenfactory.nebius.com/v1"
+  model: "nvidia/Nemotron-3_5-Lightning"
+  api_key: ""
+
+  # =========================================================================
+  # RESILIENT ZERO-DOWNTIME BACKUP: GROQ CLOUD ENGINE
+  # =========================================================================
+  groq_model: "qwen/qwen3.8-27b"
+  groq_api_key: ""
+
+  # Microphone settings
+  listen_timeout: 8        # Seconds to wait for speech to begin
+  phrase_time_limit: 12    # Max seconds for a single phrase
+  calibration_duration: 0.3  # Ambient noise calibration duration (seconds)

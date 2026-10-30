@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAYA · HOLOGRAPHIC AI ASSISTANT</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Cinematic & Particle Canvas -->
+    <div class="background-backdrop"></div>
+    <canvas id="particle-canvas"></canvas>
+    <div class="hologram-scanlines"></div>
+
+    <!-- Main HUD Overlay -->
+    <div id="hud-container">
+
+        <!-- Top Header Status Bar -->
+        <header class="hud-header">
+            <div class="header-left">
+                <span class="hud-glow-badge"><span class="pulse-dot"></span> MAYA // NEURAL AI OS</span>
+                <span class="hud-tag">BUILD v12.4</span>
+                <span class="hud-tag engine-tag">ENGINE: NVIDIA NEMOTRON-70B</span>
+            </div>
+            <div class="header-center">
+                <div class="voice-wave-container" id="voice-waves">
+                    <span class="wave-bar"></span>
+                    <span class="wave-bar"></span>
+                    <span class="wave-bar"></span>
+                    <span class="wave-bar"></span>
+                    <span class="wave-bar"></span>
+                    <span class="wave-bar"></span>
+                    <span class="wave-bar"></span>
+                    <span class="wave-bar"></span>
+                </div>
+                <span id="ai-status-indicator" class="status-text">SYSTEM STANDBY</span>
+            </div>
+            <div class="header-right">
+                <span class="telemetry-pill"><i class="icon">⚡</i> <span id="hdr-cpu">CPU 23%</span></span>
+                <span class="telemetry-pill"><i class="icon">🧠</i> <span id="hdr-ram">RAM 65%</span></span>
+                <button id="btn-header-mic" class="mic-trigger-btn" title="Click to Speak"><i class="icon">🎙️</i> LISTEN</button>
+            </div>
+        </header>
+
+        <!-- Main Bento Grid Layout -->
+        <main class="hud-grid">
+
+            <!-- ================= LEFT COLUMN ================= -->
+            <div class="hud-col col-left">
+
+                <!-- 1. SYSTEM OVERVIEW (Radial Dials) -->
+                <section class="hud-panel panel-system-overview">
+                    <div class="panel-header">
+                        <span class="panel-title">SYSTEM OVERVIEW</span>
+                        <div class="window-controls">
+                            <span class="ctrl">−</span>
+                            <span class="ctrl">□</span>
+                            <span class="ctrl close">✕</span>
+                        </div>
+                    </div>
+                    <div class="radial-dials-grid">
+                        <!-- CPU Dial -->
+                        <div class="dial-item">
+                            <div class="radial-gauge" data-percent="23">
+                                <svg viewBox="0 0 100 100">
+                                    <circle class="gauge-bg" cx="50" cy="50" r="40"></circle>
+                                    <circle class="gauge-fill gauge-cyan" cx="50" cy="50" r="40" style="stroke-dashoffset: 193;"></circle>
+                                </svg>
+                                <span class="gauge-val" id="dial-cpu-val">23%</span>
+                            </div>
+                            <span class="dial-label">CPU</span>
+                            <span class="dial-sub">3.2 GHz</span>
+                        </div>
+
+                        <!-- RAM Dial -->
+                        <div class="dial-item">
+                            <div class="radial-gauge" data-percent="65">
+                                <svg viewBox="0 0 100 100">
+                                    <circle class="gauge-bg" cx="50" cy="50" r="40"></circle>
+                                    <circle class="gauge-fill gauge-purple" cx="50" cy="50" r="40" style="stroke-dashoffset: 88;"></circle>
+                                </svg>
+                                <span class="gauge-val" id="dial-ram-val">65%</span>
+                            </div>
+                            <span class="dial-label">RAM</span>
+                            <span class="dial-sub">10.3 / 15.6 GB</span>
+                        </div>
+
+                        <!-- DISK Dial -->
+                        <div class="dial-item">
+                            <div class="radial-gauge" data-percent="42">
+                                <svg viewBox="0 0 100 100">
+                                    <circle class="gauge-bg" cx="50" cy="50" r="40"></circle>
+                                    <circle class="gauge-fill gauge-amber" cx="50" cy="50" r="40" style="stroke-dashoffset: 145;"></circle>
+                                </svg>
+                                <span class="gauge-val" id="dial-disk-val">42%</span>
+                            </div>
+                            <span class="dial-label">DISK</span>
+                            <span class="dial-sub">256 / 512 GB</span>
+                        </div>
+
+                        <!-- NET Dial -->
+                        <div class="dial-item">
+                            <div class="radial-gauge" data-percent="68">
+                                <svg viewBox="0 0 100 100">
+                                    <circle class="gauge-bg" cx="50" cy="50" r="40"></circle>
+                                    <circle class="gauge-fill gauge-cyan" cx="50" cy="50" r="40" style="stroke-dashoffset: 80;"></circle>
+                                </svg>
+                                <span class="gauge-val" id="dial-net-val">68%</span>
+                            </div>
+                            <span class="dial-label">NET</span>
+                            <span class="dial-sub">256 / 512 GB</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. TERMINAL (Neofetch & Command Output) -->
+                <section class="hud-panel panel-terminal">
+                    <div class="panel-header">
+                        <span class="panel-title">TERMINAL</span>
+                        <div class="window-controls">
+                            <span class="ctrl">−</span>
+                            <span class="ctrl">□</span>
+                            <span class="ctrl close">✕</span>
+                        </div>
+                    </div>
+                    <div class="terminal-body" id="terminal-content">
+                        <div class="term-command"><span class="prompt-user">nimish@maya</span>:<span class="prompt-dir">~</span>$ neofetch</div>
+                        <div class="neofetch-grid">
+                            <div class="ascii-art">
+                                <pre>
+     /\_/\  
+    ( o.o ) 
+     > ^ <  
+   [ MAYA ] 
+  AI COMPANION
+                                </pre>
+                            </div>
+                            <div class="specs-list">
+                                <div><span class="k">OS:</span> Windows 11 Pro 64-bit</div>
+                                <div><span class="k">Host:</span> Maya Cyber Station</div>
+                                <div><span class="k">Kernel:</span> 10.0.26100.3194</div>
+                                <div><span class="k">Uptime:</span> 3 hours, 42 mins</div>
+                                <div><span class="k">Packages:</span> 128 registered tools</div>
+                                <div><span class="k">Shell:</span> PowerShell / Python 3.12</div>
+                                <div><span class="k">Resolution:</span> 2560x1440</div>
+                                <div><span class="k">Engine:</span> NVIDIA Nemotron-70B</div>
+                                <div><span class="k">Speech:</span> Edge Neural (EN + GU)</div>
+                                <div><span class="k">Memory Vault:</span> AES-256 Encrypted</div>
+                            </div>
+                        </div>
+                        <div class="term-log-stream" id="term-logs">
+                            <div class="log-line"><span class="prompt-user">nimish@maya</span>:<span class="prompt-dir">~</span>$ <span class="term-cursor">_</span></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. REAL-TIME LOGS -->
+                <section class="hud-panel panel-logs">
+                    <div class="panel-header">
+                        <span class="panel-title">REAL-TIME LOGS</span>
+                        <div class="window-controls">
+                            <span class="ctrl">−</span>
+                            <span class="ctrl">□</span>
+                            <span class="ctrl close">✕</span>
+                        </div>
+                    </div>
+                    <div class="logs-feed" id="logs-container">
+                        <div class="log-entry"><span class="log-ts">10:15:23</span> <span class="badge info">[INFO]</span> System scan completed</div>
+                        <div class="log-entry"><span class="log-ts">10:15:24</span> <span class="badge info">[INFO]</span> All services are running</div>
+                        <div class="log-entry"><span class="log-ts">10:15:25</span> <span class="badge warn">[WARN]</span> Disk usage at 42%</div>
+                        <div class="log-entry"><span class="log-ts">10:15:26</span> <span class="badge success">[INFO]</span> Memory vault synchronized</div>
+                        <div class="log-entry"><span class="log-ts">10:15:27</span> <span class="badge info">[INFO]</span> AI assistant Maya ready</div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- ================= CENTER COLUMN (Holographic Avatar Viewport) ================= -->
+            <div class="hud-col col-center">
+                <div class="hologram-stage-overlay">
+                    <div class="hologram-reticle">
+                        <div class="reticle-ring ring-outer"></div>
+                        <div class="reticle-ring ring-middle"></div>
+                        <div class="reticle-ring ring-inner"></div>
+                    </div>
+                    <div class="avatar-tag-overlay">
+                        <span class="avatar-name">MAYA</span>
+                        <span class="avatar-sub">NEURAL HOLOGRAPHIC COMPANION</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= RIGHT COLUMN ================= -->
+            <div class="hud-col col-right">
+
+                <!-- 4. AI CHAT INTERFACE -->
+                <section class="hud-panel panel-chat">
+                    <div class="panel-header">
+                        <span class="panel-title">AI CHAT INTERFACE</span>
+                        <div class="window-controls">
+                            <span class="ctrl">−</span>
+                            <span class="ctrl">□</span>
+                            <span class="ctrl close">✕</span>
+                        </div>
+                    </div>
+                    <div class="chat-messages" id="chat-stream">
+                        <!-- Welcome Message Bubble from MAYA -->
+                        <div class="msg-bubble assistant-bubble">
+                            <div class="bubble-header">
+                                <span class="avatar-dot"></span>
+                                <span class="sender-name">MAYA</span>
+                            </div>
+                            <div class="bubble-content">
+                                Hello! I am MAYA, your Intelligent System Assistant.<br>
+                                How can I help you today?
+                            </div>
+                        </div>
+
+                        <!-- Suggestions Card -->
+                        <div class="suggestions-card">
+                            <div class="sugg-title">You can ask me to:</div>
+                            <button class="sugg-item" onclick="sendSuggestion('Optimize my system')">&gt; Optimize your system</button>
+                            <button class="sugg-item" onclick="sendSuggestion('Write Python code for system monitoring')">&gt; Write or debug code</button>
+                            <button class="sugg-item" onclick="sendSuggestion('Organize my downloads folder')">&gt; Automate tasks</button>
+                            <button class="sugg-item" onclick="sendSuggestion('Check system performance')">&gt; Monitor performance</button>
+                            <button class="sugg-item" onclick="sendSuggestion('તમે કેવું અનુભવો છો?')">&gt; Speak in Gujarati (ગુજરાતી)</button>
+                        </div>
+                    </div>
+
+                    <!-- Chat Input Box -->
+                    <div class="chat-input-wrapper">
+                        <input type="text" id="chat-input" placeholder="Ask MAYA anything..." autocomplete="off">
+                        <button id="btn-chat-mic" class="input-btn mic-btn" title="Speak to Maya">🎙️</button>
+                        <button id="btn-chat-send" class="input-btn send-btn" title="Send message">➤</button>
+                    </div>
+                </section>
+
+                <!-- 5. CODE SNIPPET (Live Execution Script) -->
+                <section class="hud-panel panel-code">
+                    <div class="panel-header">
+                        <span class="panel-title">CODE SNIPPET</span>
+                        <div class="window-controls">
+                            <span class="ctrl">−</span>
+                            <span class="ctrl">□</span>
+                            <span class="ctrl close">✕</span>
+                        </div>
+                    </div>
+                    <div class="code-editor-view">
+                        <pre><code><span class="c-keyword">import</span> psutil
+
+<span class="c-keyword">def</span> <span class="c-func">system_health</span>():
+    cpu = psutil.cpu_percent()
+    ram = psutil.virtual_memory().percent
+    disk = psutil.disk_usage(<span class="c-str">'/'</span>).percent
+    <span class="c-keyword">return</span> {<span class="c-str">"cpu"</span>: cpu, <span class="c-str">"ram"</span>: ram, <span class="c-str">"disk"</span>: disk}
+
+<span class="c-keyword">if</span> __name__ == <span class="c-str">"__main__"</span>:
+    <span class="c-func">print</span>(system_health())</code></pre>
+                    </div>
+                </section>
+
+                <!-- 6. SHORTCUTS -->
+                <section class="hud-panel panel-shortcuts">
+                    <div class="panel-header">
+                        <span class="panel-title">SHORTCUTS</span>
+                        <div class="window-controls">
+                            <span class="ctrl">−</span>
+                            <span class="ctrl">□</span>
+                            <span class="ctrl close">✕</span>
+                        </div>
+                    </div>
+                    <div class="shortcuts-grid">
+                        <button class="shortcut-btn" onclick="executeQuickAction('update_system')">
+                            <span class="s-icon">🔄</span>
+                            <span class="s-name">Update System</span>
+                        </button>
+                        <button class="shortcut-btn" onclick="executeQuickAction('clean_cache')">
+                            <span class="s-icon">🧹</span>
+                            <span class="s-name">Clean Cache</span>
+                        </button>
+                        <button class="shortcut-btn" onclick="executeQuickAction('system_info')">
+                            <span class="s-icon">ℹ️</span>
+                            <span class="s-name">System Info</span>
+                        </button>
+                        <button class="shortcut-btn" onclick="executeQuickAction('smart_backup')">
+                            <span class="s-icon">💾</span>
+                            <span class="s-name">Smart Backup</span>
+                        </button>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- ================= FAR RIGHT SIDEBAR (SYSTEM MONITOR) ================= -->
+            <div class="hud-col col-sidebar">
+                <section class="hud-panel panel-monitor">
+                    <div class="panel-header">
+                        <span class="panel-title">SYSTEM MONITOR</span>
+                    </div>
+
+                    <div class="monitor-metric">
+                        <div class="m-head">
+                            <span class="m-label">CPU Usage</span>
+                            <span class="m-val" id="spark-cpu-val">23%</span>
+                        </div>
+                        <canvas id="spark-cpu" class="sparkline-canvas" width="160" height="32"></canvas>
+                    </div>
+
+                    <div class="monitor-metric">
+                        <div class="m-head">
+                            <span class="m-label">RAM Usage</span>
+                            <span class="m-val m-purple" id="spark-ram-val">65%</span>
+                        </div>
+                        <canvas id="spark-ram" class="sparkline-canvas" width="160" height="32"></canvas>
+                    </div>
+
+                    <div class="monitor-metric">
+                        <div class="m-head">
+                            <span class="m-label">Disk Usage</span>
+                            <span class="m-val m-amber" id="spark-disk-val">42%</span>
+                        </div>
+                        <canvas id="spark-disk" class="sparkline-canvas" width="160" height="32"></canvas>
+                    </div>
+
+                    <div class="monitor-metric">
+                        <div class="m-head">
+                            <span class="m-label">Network</span>
+                            <span class="m-val">1.2 Gbps</span>
+                        </div>
+                        <div class="network-meter-bar">
+                            <div class="net-fill" style="width: 74%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Process List -->
+                    <div class="process-subpanel">
+                        <div class="p-title">Active Processes</div>
+                        <div class="process-table">
+                            <div class="p-row p-head">
+                                <span>Process</span>
+                                <span>Status</span>
+                            </div>
+                            <div class="p-row">
+                                <span class="p-name">python (maya)</span>
+                                <span class="p-status active">ACTIVE</span>
+                            </div>
+                            <div class="p-row">
+                                <span class="p-name">code (vscode)</span>
+                                <span class="p-status">IDLE</span>
+                            </div>
+                            <div class="p-row">
+                                <span class="p-name">docker</span>
+                                <span class="p-status">DAEMON</span>
+                            </div>
+                            <div class="p-row">
+                                <span class="p-name">chrome</span>
+                                <span class="p-status">RUNNING</span>
+                            </div>
+                            <div class="p-row">
+                                <span class="p-name">spotify</span>
+                                <span class="p-status">READY</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+# ─────────────────────────────────────────
+# Maya Voice Assistant — .gitignore
+# ─────────────────────────────────────────
+
+# Secret key & encrypted database — NEVER commit these
+maya_secret.key
+maya_history.db
+
+# Python environments
+venv/
+venv_old/
+venv_312/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# Environment variables file
+.env
+
+# Local API settings
+Groq api setting.txt
+
+# IDE & OS files
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Web_maya audio cache
+Web_maya/audio_cache/
