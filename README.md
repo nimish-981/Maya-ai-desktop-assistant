@@ -106,7 +106,7 @@ Natural Spoken Response via Edge Neural Voice
 
 Clone this repository and install dependencies:
 ```bash
-git clone https://github.com/nimish-981/Maya-ai-desktop-assistant.git
+git clone --branch sanitized-project-import https://github.com/nimish-981/Maya-ai-desktop-assistant.git
 cd Maya-ai-desktop-assistant
 python -m venv venv
 venv\Scripts\activate
@@ -118,14 +118,16 @@ pip install -r requirements.txt
 Get your Nebius Token Factory API key from the [Nebius Builder Program](https://dev.nebius.com/builders).
 
 Set your environment variable:
-```cmd
+```powershell
+$env:NEBIUS_API_KEY = "your_nebius_api_key_here"
+```
+
+For a persistent Windows user variable, use `setx` instead, then open a new terminal:
+```powershell
 setx NEBIUS_API_KEY "your_nebius_api_key_here"
 ```
-Or copy `.env.example` to `.env`:
-```bash
-copy .env.example .env
-```
-Add your key inside `.env` or in `config.yaml`.
+
+If you use Groq as a fallback provider, set `GROQ_API_KEY` the same way. Maya reads API keys from environment variables; it does not load `.env` files. Never put real API keys in `config.yaml`, source files, Git commits, or your public Devpost submission. Keep the example values in `.env.example` as placeholders only.
 
 ### 4. Running Maya
 
